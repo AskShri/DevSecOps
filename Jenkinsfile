@@ -1,7 +1,7 @@
 pipeline {
   agent any 
   tools {
-    dsomaven 'Maven'
+    maven 'Maven'
   }
   stages {
     stage ('Initialize') {
