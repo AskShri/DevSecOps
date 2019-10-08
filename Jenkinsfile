@@ -25,7 +25,7 @@ tools {
     stage ('Deploy-To-Tomcat') {
             steps {
            sshagent(['Tomcat']) {
-                sh 'scp -o StrictHostKeyChecking=no target/*.war dsoadmin@52.170.151.39:/apache/apache-tomcat-9.0.26/webapps/webapp.war'
+                sh 'scp -o StrictHostKeyChecking=no target/*.war dsoadmin@52.170.151.39:/apache/apache-tomcat-9.0.26/webapps/WebApp.war'
               }      
            }   
           }
