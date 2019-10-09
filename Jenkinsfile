@@ -23,14 +23,6 @@ tools {
       }
     }
     
-     stage ('SAST') {
-      steps {
-        withSonarQubeEnv('sonar') {
-          sh 'mvn sonar:sonar'
-         
-        }
-      }
-    }
     
             stage ('Source Composition Analysis') {
       steps {
