@@ -39,8 +39,11 @@ tools {
     
     stage ('Deploy-To-Tomcat') {
             steps {
-           sshagent(['tomcat']) {
-                sh 'scp -r /var/lib/jenkins/workspace/dso/target/WenApp.war dsoadmin@52.170.151.39:/tmp/WebApp.war'
+          
+              sshagent(['tomcat']) {
+                
+                sh 'scp -r /target/WebApp.war dsoadmin@52.170.151.39:/tmp/WebApp.war'
+             
               }      
            }   
           }
