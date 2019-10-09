@@ -23,6 +23,15 @@ tools {
       }
     }
     
+     stage ('SAST') {
+      steps {
+        withSonarQubeEnv('sonar') {
+          sh 'mvn sonar:sonar'
+          sh 'cat target/sonar/report-task.txt'
+        }
+      }
+    }
+    
             stage ('Source Composition Analysis') {
       steps {
          sh 'rm owasp* || true'
