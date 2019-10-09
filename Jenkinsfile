@@ -26,8 +26,7 @@ tools {
     
             stage ('Source Composition Analysis') {
       steps {
-         sh 'rm /var/lib/jenkins/workspace/dso/owasp* || true'
-         sh 'bash /var/lib/jenkins/workspace/dso/owasp-dependency-check.sh'
+         sh 'bash owasp-dependency-check.sh'
         
       }
     }
