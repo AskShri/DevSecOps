@@ -15,7 +15,7 @@ tools {
       }
     }
     
-     stage ('Check-Git-Secrets') {
+      stage ('Check-Git-Secrets') {
       steps {
         sh 'rm trufflehog || true'
         sh 'docker run gesellix/trufflehog --json https://github.com/AskShri/DevSecOps.git > trufflehog'
@@ -23,6 +23,25 @@ tools {
       }
     }
     
+     stage ('SAST') {
+      steps {
+        withSonarQubeEnv('sonar') {
+          sh 'mvn sonar:sonar'
+          sh 'cat /var/lib/jenkins/workspace/DevSecOps\ Pipeline\ 2/target/sonar/report-task.txt'
+        }
+      }
+    }
+    
+            stage ('Source Composition Analysis') {
+      steps {
+         sh 'rm owasp* || true'
+         sh 'wget "https://raw.githubusercontent.com/cehkunal/webapp/master/owasp-dependency-check.sh" '
+         sh 'chmod +x owasp-dependency-check.sh'
+         sh 'bash owasp-dependency-check.sh'
+         sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
+        
+      }
+    }
     
     stage ('Build') {
       steps {
@@ -33,7 +52,7 @@ tools {
     stage ('Deploy-To-Tomcat') {
             steps {
            sshagent(['tomcat']) {
-                 sh 'scp -r -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/DevSecOps\ Pipeline\ 2/target/*.war dsoadmin@52.170.151.39:/tmp/WebApp.war'
+                sh 'sudo scp -r /var/lib/jenkins/workspace/DevSecOps\ Pipeline\ 2/target/*.war dsoadmin@52.170.151.39:/apache/apache-tomcat-9.0.26/webapps/WebApp.war'
               }      
            }   
           }
