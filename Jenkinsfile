@@ -26,7 +26,7 @@ tools {
     stage ('Deploy-To-Tomcat') {
             steps {
            sshagent(['tomcat']) {
-                sh 'sudo scp -r /var/lib/jenkins/workspace/dso/target/*.war dsoadmin@52.170.151.39:/apache/apache-tomcat-9.0.26/webapps/WebApp.war'
+                sh 'scp -r /var/lib/jenkins/workspace/dso/target/*.war dsoadmin@52.170.151.39:/apache/apache-tomcat-9.0.26/webapps/WebApp.war'
               }      
            }   
           }
