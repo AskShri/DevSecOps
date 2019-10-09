@@ -42,7 +42,7 @@ tools {
           
               sshagent(['tomcat']) {
                 
-                sh 'scp -r /target/WebApp.war dsoadmin@52.170.151.39:/tmp/WebApp.war'
+                sh 'scp /target/WebApp.war dsoadmin@52.170.151.39:apache/apache-tomcat-9.0.26/webapps/WebApp.war'
              
               }      
            }   
