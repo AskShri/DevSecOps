@@ -15,11 +15,12 @@ tools {
       }
     }
       
- stage ('Check-Git-Secrets') {
+     stage ('SAST') {
       steps {
-        sh 'rm trufflehog || true'
-        sh 'docker run gesellix/trufflehog --json https://github.com/AskShri/DevSecOps.git > trufflehog'
-        sh 'cat trufflehog'
+        withSonarQubeEnv('sonar') {
+          sh 'mvn sonar:sonar'
+          sh 'cat /var/lib/jenkins/workspace/dso/target/sonar/report-task.txt'
+        }
       }
     }
     
