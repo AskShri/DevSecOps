@@ -33,7 +33,7 @@ tools {
     stage ('Deploy-To-Tomcat') {
             steps {
            sshagent(['tomcat']) {
-                sh 'scp -r target/*.war dsoadmin@52.170.151.39:/etc/WebApp.war'
+                sh 'scp -r target/*.war dsoadmin@52.170.151.39:/tmp/WebApp.war'
               }      
            }   
           }
